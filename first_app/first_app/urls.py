@@ -19,7 +19,7 @@ from django.conf.urls.static import static
 
 from django.conf.urls import url, include
 from django.contrib import admin
-from .view import home_page, about_page, contact_page
+from .view import home_page, about_page, contact_page, login_page, register_page
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -27,6 +27,7 @@ urlpatterns = [
     url(r'^$',home_page,name='home'),
     url(r'^about/$',about_page,name='about'),
     url(r'^contact/$',contact_page,name='contact'),
+    url(r'^login/$', login_page, name="login_page")
 ]
 if settings.DEBUG:
     urlpatterns = urlpatterns + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
