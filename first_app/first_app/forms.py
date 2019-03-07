@@ -1,22 +1,28 @@
 from django import forms
 
 class ContactForm(forms.Form):
-    fullname = forms.CharField(widget=forms.TextInput(
-                                                    attrs={
-                                                        'class':'form-control',
-                                                        'placeholder':'Your name...'
-                                                        })
-                                                )
-    email = forms.EmailField(widget=forms.EmailInput(
-                                                    attrs={
-                                                        'class':'form-control',
-                                                        'placeholder':'Your email'
-                                                        })
-                                                )
-    content = forms.CharField(widget=forms.Textarea(
-                                                    attrs={
-                                                        'class':'form-control',
-                                                         'placeholder':'Your text...'
-                                                         })
-                                                )
-    
+	fullname = forms.CharField(widget=forms.TextInput(
+													attrs={
+														'class':'form-control',
+														'placeholder':'Your name...'
+														})
+												)
+	email = forms.EmailField(widget=forms.EmailInput(
+													attrs={
+														'class':'form-control',
+														'placeholder':'Your email'
+														})
+												)
+	content = forms.CharField(widget=forms.Textarea(
+													attrs={
+														'class':'form-control',
+														 'placeholder':'Your text...'
+														 })
+												)
+	def clean_email(self):
+		print ("here")
+		email = self.cleaned_data.get("email")
+		print (email)
+		if not "gmail.com" in email:
+			raise forms.ValidationError("Email has to be gmail.com")
+		return email

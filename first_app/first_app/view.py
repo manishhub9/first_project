@@ -16,12 +16,14 @@ def about_page(request):
 	return render(request,"home.html",context)
 
 def contact_page(request):
-	print('method invoke..contact_page')
-	contact_form = ContactForm()
+	print('method invoke__contact_page')
+	contact_form = ContactForm(request.POST or None)
 	context = {"title":"Contact Page",
 				"content":"Welcome to Contact Page",
 				"form":contact_form
 				}
-	if request.method == 'POST':
-		print (request.POST)
+	# if request.method == 'POST':
+	# 	print (request.POST)
+	if contact_form.is_valid():
+		print(contact_form.cleaned_data)
 	return render(request,"contact/view.html",context)
