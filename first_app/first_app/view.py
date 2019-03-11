@@ -1,11 +1,13 @@
 from django.shortcuts import render, redirect
-from .forms import ContactForm, LoginForm
-from django.contrib.auth import authenticate,login
+from .forms import ContactForm, LoginForm, RegisterForm
+from django.contrib.auth import authenticate,login,get_user_model
 
 def home_page(request):
 	context = {"title":"Home Page",
 				"content":"Welcome to Home Page"
 				}
+	if request.user.is_authenticated():
+		context["premium_content"] = "Yeahhhhh"
 	print('method invoke..home_page')
 	return render(request,"home.html",context)
 
@@ -42,6 +44,15 @@ def login_page(request):
 		else:
 			print ("error")
 	return render(request,"auth/login.html",context)
-
+User = get_user_model()
 def register_page(request):
-	return render(request,"",{})
+	form = RegisterForm(request.POST or None)
+	context = {"form":form}
+	if form.is_valid():
+		username = form.cleaned_data.get("username")
+		email = form.cleaned_data.get("email")
+		password = form.cleaned_data.get("password")
+		password2 = form.cleaned_data.get("password2")
+		new_user = User.objects.create_user(username,email,password)
+		print (new_user)		
+	return render(request,"auth/register.html",context)

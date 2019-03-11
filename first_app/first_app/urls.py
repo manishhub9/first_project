@@ -27,7 +27,8 @@ urlpatterns = [
     url(r'^$',home_page,name='home'),
     url(r'^about/$',about_page,name='about'),
     url(r'^contact/$',contact_page,name='contact'),
-    url(r'^login/$', login_page, name="login_page")
+    url(r'^login/$', login_page, name="login_page"),
+    url(r'register/$', register_page, name="register_page"),
 ]
 if settings.DEBUG:
     urlpatterns = urlpatterns + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
