@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-  {{object.timestamp|timesince}}
+  {{object.timestamp|timesince}} ago </br>
   {{object.title}}</br>
   {{object.description}}</br>
   {% if object.image%}
