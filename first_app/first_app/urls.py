@@ -24,6 +24,7 @@ from .view import home_page, about_page, contact_page, login_page, register_page
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'', include('products.urls',namespace='products')),
+    url(r'search', include('search.urls',namespace='products')),
     url(r'^$',home_page,name='home'),
     url(r'^about/$',about_page,name='about'),
     url(r'^contact/$',contact_page,name='contact'),
