@@ -3,7 +3,7 @@ services:
   python:
     image: python:3.6
     volumes:
-      - ./first_project:/first_project
+      - ./first_app:/first_app
     command: sleep infinity
     tty: true
     # command: cd /first_app && pip install -r requirements.txt && python manage.py runserver
