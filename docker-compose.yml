@@ -12,7 +12,7 @@ services:
     ports:
       - 8000:8000
   postgres:
-    image: postgres:9.6
+    image: postgres:10.7
     environment:
       POSTGRES_USER: ecomuser
       POSTGRES_DB: ecom
