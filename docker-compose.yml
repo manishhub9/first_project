@@ -1,4 +1,6 @@
 version: '3'
+volumes:
+  pgdata:
 services:
   python:
     # image: python:3.6
@@ -9,5 +11,13 @@ services:
       - ./first_app:/first_app
     ports:
       - 8000:8000
-    tty: true
-    # command: cd /first_app && pip install -r requirements.txt && python manage.py runserver
+  postgres:
+    image: postgres:9.6
+    environment:
+      POSTGRES_USER: ecomuser
+      POSTGRES_DB: ecom
+      POSTGRES_PASS: testuser123
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
