@@ -1,9 +1,13 @@
 version: '3'
 services:
   python:
-    image: python:3.6
+    # image: python:3.6
+    build:
+      context: .
+      dockerfile: docker/python/Dockerfile
     volumes:
       - ./first_app:/first_app
-    command: sleep infinity
+    ports:
+      - 8000:8000
     tty: true
     # command: cd /first_app && pip install -r requirements.txt && python manage.py runserver
