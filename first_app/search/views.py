@@ -3,6 +3,7 @@ from django.views.generic import ListView, DetailView
 from products.models import Product
 
 
+
 class SearchProductView(ListView):
 	queryset = Product.objects.all()
 	template_name = 'search/view.html'
@@ -15,5 +16,5 @@ class SearchProductView(ListView):
 		request = self.request
 		query = request.GET.get('q',None)
 		if query is not None:
-			return Product.objects.filter(title__icontains=query)
+			return Product.objects.search(query)
 		return Product.objects.featured()

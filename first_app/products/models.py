@@ -3,6 +3,7 @@ from django.db import models
 from django.db.models.signals import pre_save, post_save
 from django.urls import reverse
 from .utils import unique_slug_generator
+from django.db.models import Q
 
 def get_file_ext(filepath):
 	base_name = os.path.basename(filepath)
@@ -14,15 +15,29 @@ def upload_image_path(instance,filename):
 	name, ext = get_file_ext(filename)
 	final_filename = '{}{}'.format(new_filename,ext)
 	return 'products/{}/{}'.format(new_filename,final_filename)
+class ProductQuerySet(models.query.QuerySet):
+	def active(self):
+		return self.filter(active=True)
+	def featured(self):
+		return self.filter(featured=True, active=True)
+	def search(self,query):
+		lookups = Q(title__icontains=query) | Q(description__icontains=query)
+		return self.filter(lookups).distinct()
 
 class ProductManager(models.Manager):
+	def get_queryset(self):
+		return ProductQuerySet(self.model, using=self._db)
+
 	def featured(self):
-		return self.get_queryset().filter(featured=True)
+		return self.get_queryset().featured()
+
 	def get_by_id(self, id):
 		qs = self.get_queryset().filter(id=id)
 		if qs.count() == 1:
 			return qs.first()
 		return None
+	def search(self, query):
+		return self.get_queryset().active().search(query)
 
 class Product(models.Model):
 	title = models.CharField(max_length=120)
