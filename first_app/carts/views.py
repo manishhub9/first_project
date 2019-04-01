@@ -1,9 +1,6 @@
 from django.shortcuts import render
+from .models import Cart
 
 def cart_home(request):
-    # print (request.session)
-    # print(dir(request.session))
-    # key = request.session.session_key
-    # print('keys is ',key)
-    # request.session['cart_id'] = 12
+    cart_obj, new_obj = Cart.objects.new_or_get(request)
     return render(request,'carts/home.html',{})
