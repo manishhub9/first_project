@@ -3,6 +3,7 @@ from .forms import ContactForm, LoginForm, RegisterForm
 from django.contrib.auth import authenticate,login,get_user_model
 
 def home_page(request):
+	# print(request.session.get('first_name'))
 	context = {"title":"Home Page",
 				"content":"Welcome to Home Page"
 				}
@@ -54,5 +55,5 @@ def register_page(request):
 		password = form.cleaned_data.get("password")
 		password2 = form.cleaned_data.get("password2")
 		new_user = User.objects.create_user(username,email,password)
-		print (new_user)		
+		print (new_user)
 	return render(request,"auth/register.html",context)
