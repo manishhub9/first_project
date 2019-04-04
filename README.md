@@ -3,10 +3,9 @@ Simple Django E-Commerece project with docker.
 
 For running this project to your machine.
 
-CLone the project and do commands:
+Clone the project and do:
 
-**docker-compose build
-This will install django==1.11, postgresql=10.7**
+**docker-compose build**
 
 **docker-compose up**
 
