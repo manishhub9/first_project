@@ -7,6 +7,7 @@ def cart_home(request):
     cart_obj, new_obj = Cart.objects.new_or_get(request)
     return render(request,'carts/home.html',{})
 def cart_update(request):
+    print(request.POST)
     produtc_id = 7
     product_obj = Product.objects.get(id=produtc_id)
     cart_obj, new_obj = Cart.objects.new_or_get(request)
