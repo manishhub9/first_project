@@ -1,5 +1,7 @@
 from django.db import models
 from carts.models import Cart
+from first_app.utils import unique_order_id_generartor
+from django.db.models.signals import pre_save
 
 ORDER_STATUS_CHOICES = (
             ('created','Created'),
@@ -15,3 +17,9 @@ class Order(models.Model):
     total = models.DecimalField(default=0.00,max_digits=100,decimal_places=2)
     def __str__(self):
         return self.order_id
+
+def pre_save_create_order_id(sender, instance,*args,**kwargs):
+    if not instance.order_id:
+        instance.order_id = unique_order_id_generartor(instance)
+
+pre_save.connect(pre_save_create_order_id,sender=Order)
