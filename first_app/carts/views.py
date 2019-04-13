@@ -2,7 +2,8 @@ from django.shortcuts import render, redirect
 from .models import Cart
 from orders.models import Order
 from products.models import Product
-
+from accounts.forms import LoginForm
+from billing.models import BillingProfile
 
 def cart_home(request):
     cart_obj, new_obj = Cart.objects.new_or_get(request)
@@ -15,7 +16,16 @@ def checkout_home(request):
         return redirect("cart:home")
     else:
         order_obj, new_order_obj = Order.objects.get_or_create(cart=cart_obj)
-    return render(request,'carts/checkout_home.html',{"object":order_obj})
+    user = request.user
+    billing_profile = None
+    login_form = LoginForm()
+    if user.is_authenticated():
+        billing_profile, billing_profile_created = BillingProfile.objects.get_or_create(
+                                                            user=user, email=user.email)
+    context = {"object":order_obj,
+                "billing_profile":billing_profile,
+                "login_form":login_form}
+    return render(request,'carts/checkout_home.html',context)
 
 def cart_update(request):
     product_id = request.POST.get('product_id')
