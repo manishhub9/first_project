@@ -21,7 +21,7 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from django.contrib.auth.views import LogoutView
 from .view import home_page, about_page, contact_page
-from accounts.views import login_page, register_page
+from accounts.views import login_page, register_page,guest_register_view
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -32,6 +32,7 @@ urlpatterns = [
     url(r'^about/$',about_page,name='about'),
     url(r'^contact/$',contact_page,name='contact'),
     url(r'^login/$', login_page, name="login"),
+    url(r'^register/guest/$', guest_register_view, name="guest_register"),
     url(r'^logout/$', LogoutView.as_view(), name="logout"),
     url(r'^register/$', register_page, name="register"),
 ]
