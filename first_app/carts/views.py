@@ -4,7 +4,7 @@ from orders.models import Order
 from accounts.models import GuestEmail
 from products.models import Product
 from accounts.forms import LoginForm, GuestForm
-from address.forms import AddressForm
+from addresses.forms import AddressForm
 from billing.models import BillingProfile
 
 def cart_home(request):
@@ -23,7 +23,7 @@ def checkout_home(request):
 	blling_address_form = AddressForm()
 	billing_profile, billing_profile_created = BillingProfile.objects.new_or_get(request)
 	if billing_profile is not None:
-		order_obj = Order.objects.new_or_get(billing_profile,cart_obj)
+		order_obj, order_obj_created = Order.objects.new_or_get(billing_profile,cart_obj)
 	context = {"object":order_obj,
 				"billing_profile":billing_profile,
 				"login_form":login_form,
