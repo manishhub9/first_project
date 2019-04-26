@@ -43,7 +43,7 @@ def checkout_home(request):
 				order_obj.mark_paid()
 				del request.session["cart_id"]
 				request.session["cart_items"] = 0
-				return redirect("/cart/success")
+				return redirect("cart:success")
 	context = {"object":order_obj,
 				"billing_profile":billing_profile,
 				"login_form":login_form,
@@ -68,3 +68,5 @@ def cart_update(request):
 			cart_obj.products.add(product_obj)
 		request.session["cart_items"] = cart_obj.products.count()
 	return redirect("cart:home")
+def cart_done_view(request):
+	return render(request,'carts/checkout_done.html',{})

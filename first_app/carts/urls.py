@@ -5,5 +5,6 @@ urlpatterns = [
                 url(r'^$', views.cart_home, name='home'),
                 url(r'^checkout/$',views.checkout_home,name='checkout'),
                 url(r'^update/$',views.cart_update,name='update'),
+                url(r'^checkout/success/$', views.cart_done_view, name='success'),
 
         ]
