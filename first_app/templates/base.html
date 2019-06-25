@@ -13,6 +13,60 @@
     {% include 'base/js.html' %}
     <script>
       $(document).ready(function(){
+        //contact form
+        var contactForm = $(".contact-form")
+        var contactFormMethod = contactForm.attr("method")
+        var contactFormEndpoint = contactForm.attr("action")
+        var contactFormSubmitBtn = contactForm.find(".btn btn-default")
+        contactForm.submit(function(event){
+          event.preventDefault()
+          var conatactFormData = contactForm.serialize()
+          var thisForm =  $(this)
+          $.ajax({
+            method:contactFormMethod,
+            url:contactFormEndpoint,
+            data:conatactFormData,
+            success:function(data){
+              thisForm[0].reset()
+              $.alert({
+                title:"Success!",
+                content:data.message,
+                theme:"modern"
+              })
+            },
+            error:function(error){
+                console.log(error);
+                var jsonData = error.responseJSON
+                var msg = ""
+                $.each(jsonData, function(key,value){
+                  msg += key + ": " + value[0].message + "<br/>"
+                })
+              $.alert({
+                title:"Oops!",
+                content:msg,
+                theme:"modern"
+              })
+            }
+          })
+        })
+
+        //Auto search
+        var searchForm = $(".search-form")
+        var searchInput = searchForm.find("[name='q']") //input name=q
+        var typingTimer;
+        var typingInterval = 1000; //500 ms
+        searchInput.keyup(function(event){
+          clearTimeout(typingTimer)
+          typingTimer = setTimeout(performSearch, typingInterval)
+        })
+        searchInput.keydown(function(event){
+          clearTimeout(typingTimer)
+        })
+        function performSearch(){
+          var query  = searchInput.val()
+          window.location.href = '/search/?q=' + query
+        }
+        //Cart + Add and Remove
         var productForm = $(".form-product-ajax")
         productForm.submit(function(event){
           event.preventDefault();
@@ -43,6 +97,11 @@
             error: function(errorData) {
               console.log("error");
               console.log(errorData);
+              $.alert({
+                title:"Oops!",
+                content:"An error occured",
+                theme:"modern"
+              })
             }
           })
         })
@@ -62,13 +121,16 @@
             success:function(data) {
               console.log("in success");
               console.log(data.products);
+              var hiddenCartItemRemoveForm = $(".cart-item-remove-form")
               if (data.products.length>0){
                 productRows.html(" ")
+                i = data.products.length
                 $.each(data.products, function(index,value){
-                  i=1
-                  console.log(value);
-                  cartBody.prepend("<tr><th scope=\"row\">"+ i +"</th><td>"+value.name+"</td><td>"+value.price+"</td></tr>")
-                  i++
+                  var newHiddenCartItemRemoveForm = hiddenCartItemRemoveForm.clone()
+                  newHiddenCartItemRemoveForm.css("display","block")
+                  newHiddenCartItemRemoveForm.find(".cart-item-product-id").val(value.id)
+                  cartBody.prepend("<tr><th scope=\"row\">"+ i +"</th><td><a href = '"+ value.url +"'>" + value.name + "</a>" + newHiddenCartItemRemoveForm.html() + "</td><td>"+value.price+"</td></tr>")
+                  i--
                 })
                 cartBody.find(".cart-subtotal").text(data.subtotal)
                 cartBody.find(".cart-total").text(data.total)
