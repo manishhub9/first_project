@@ -13,9 +13,9 @@ class UserManager(BaseUserManager):
 			email = self.normalize_email(email)
 		)
 		user_obj.set_password(password)
-		user.active = is_active
-		user.staff = is_staff
-		user.admin = is_admin
+		user_obj.active = is_active
+		user_obj.staff = is_staff
+		user_obj.admin = is_admin
 		user_obj.save(using=self._db)
 		return user_obj
 	def create_staffuser(self,email,password=None):
@@ -50,6 +50,10 @@ class User(AbstractBaseUser):
 		return self.email
 	def get_short_name(self):
 		return self.email
+	def has_perm(self,perm,obj=None):
+		return True
+	def has_module_perms(self, app_label):
+		return True
 
 	@property
 	def is_staff(self):

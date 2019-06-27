@@ -1,0 +1,86 @@
+[
+{
+    "model": "products.product",
+    "pk": 8,
+    "fields": {
+        "title": "Little's Junior Ring (Multicolour)",
+        "slug": "littles-junior-ring-multicolour",
+        "description": "Little's junior ring is an attractive educational toy which helps your baby recognize different colours and sizes while having fun stacking them in order",
+        "price": "176.00",
+        "image": "products/15995849/15995849.jpeg",
+        "featured": false,
+        "active": true,
+        "timestamp": "2019-06-05T17:45:41Z"
+    }
+},
+{
+    "model": "products.product",
+    "pk": 9,
+    "fields": {
+        "title": "Daniel David Men's",
+        "slug": "daniel-david-mens",
+        "description": "Daniel David Men's | Classic Watch With Crocodile Pattern & Navy Dial (Genuine Leather Band)",
+        "price": "2337.00",
+        "image": "products/20049365/20049365.jpeg",
+        "featured": false,
+        "active": true,
+        "timestamp": "2019-06-05T17:47:59Z"
+    }
+},
+{
+    "model": "products.product",
+    "pk": 10,
+    "fields": {
+        "title": "Daniel Hechter Analogue Date",
+        "slug": "daniel-hechter-analogue-date",
+        "description": "Daniel Hechter Analogue Date, Day & Hour Display Men's Watch - DH25221-NNA",
+        "price": "6200.00",
+        "image": "products/9340910/9340910.jpeg",
+        "featured": false,
+        "active": true,
+        "timestamp": "2019-06-05T17:49:32Z"
+    }
+},
+{
+    "model": "products.product",
+    "pk": 11,
+    "fields": {
+        "title": "CRESTELLO Analogue Silver Dial Men's",
+        "slug": "crestello-analogue-silver-dial-mens",
+        "description": "CRESTELLO Analogue Silver Dial Men's Watch (Crst2520G-Slv)",
+        "price": "7400.00",
+        "image": "products/4871377/4871377.jpeg",
+        "featured": false,
+        "active": true,
+        "timestamp": "2019-06-05T17:50:48Z"
+    }
+},
+{
+    "model": "products.product",
+    "pk": 12,
+    "fields": {
+        "title": "Car FM-T Energy",
+        "slug": "car-fm-t-energy",
+        "description": "Car FM-T Energy Car MP3 f2 Racing Red (FM-T, Card reader, USB-HOST, Line-in)",
+        "price": "4675.00",
+        "image": "products/9013800/9013800.jpeg",
+        "featured": false,
+        "active": true,
+        "timestamp": "2019-06-05T17:52:20Z"
+    }
+},
+{
+    "model": "products.product",
+    "pk": 13,
+    "fields": {
+        "title": "Car Mount Stand Holder",
+        "slug": "car-mount-stand-holder",
+        "description": "Importer520 Heavy-Duty Universal Car Mount Stand Holder for LG Optimus F3 MS659 LS720 VM720 (Metropcs, T-Mobile, Virgin, Sprint) (Metro PCS, T-Mobile, Virgin Mobile, Sprint)",
+        "price": "2504.00",
+        "image": "products/7158492/7158492.jpeg",
+        "featured": false,
+        "active": true,
+        "timestamp": "2019-06-05T17:53:40Z"
+    }
+}
+]
